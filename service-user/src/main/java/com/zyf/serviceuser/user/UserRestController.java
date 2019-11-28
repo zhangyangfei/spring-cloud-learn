@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,7 @@ import com.zyf.serviceuser.exception.NotFoundException;
  * rest风格站点
  */
 @RestController // 请求结果默认转换为json
+@RequestMapping("/userRestController")
 public class UserRestController {
 
 	@PostMapping("/user")
@@ -48,6 +50,7 @@ public class UserRestController {
 	public List<User> getUsers(@PathVariable int id, @PathVariable String name) {
 		// 省略条件查询过程
 		User[] users = {new User(1, "吉姆格林", 1, "rest风格，更新部分属性")};
+//		User[] users = {};
 		if (users.length < 1) {
 			throw new NotFoundException("001", "没有相关用户");
 		}
