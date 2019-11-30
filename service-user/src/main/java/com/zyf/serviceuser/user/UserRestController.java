@@ -39,6 +39,7 @@ public class UserRestController {
 	@GetMapping(value = "/user/{id}", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<User> getUser2(@PathVariable int id) {
 		// 省略主键查询过程
+		System.out.println("用户id="+id);
 		User user = new User(1, "李四", 1, "rest风格获取用户");
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("issuccess", "true");// 设置响应头
