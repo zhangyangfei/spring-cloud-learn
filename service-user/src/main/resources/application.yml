@@ -1,0 +1,10 @@
+server:
+  port: 9102 # 服务器端口
+spring:
+  application:
+    name: serviceuser #微服务名称
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+
