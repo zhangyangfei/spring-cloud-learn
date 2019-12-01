@@ -91,4 +91,38 @@ $(function() {
 			}
 		});
 	});
+	
+	var porduct = {
+		id : 15,
+		name : '产品15',
+	};
+	$("#proInsert").click(function() {
+		$.post({
+			url : "/product/insert",
+			// 此处需要告知传递参数类型为JSON，不能缺少
+			contentType : "application/json",
+			// 将JSON转化为字符串传递
+			data : JSON.stringify(porduct),
+			// 成功后的方法
+			success : function(result,status,jqXHR) {
+				var sta = jqXHR.status;// 获取HttpStatus
+				if (result != null) {
+					alert(JSON.stringify(result));
+				}
+			}
+		});
+	});
+	
+	$("#getPro").click(function() {
+		$.post({
+			url : "/product/getById/1",
+			success : function(result,status,jqXHR) {
+				var issuccess = jqXHR.getResponseHeader("issuccess"); //获取响应头数据
+				var sta = jqXHR.status;// 获取HttpStatus
+				if (result != null) {
+					alert(JSON.stringify(result));
+				}
+			}
+		});
+	});
 });

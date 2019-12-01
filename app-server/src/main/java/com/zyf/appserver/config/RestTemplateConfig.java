@@ -12,7 +12,7 @@ public class RestTemplateConfig {
 	 * restTemplate负载均衡访问微服务
 	 */
 	@Bean("servcieRestTemplate")
-	@LoadBalanced
+	@LoadBalanced // ribbon负载均衡
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}

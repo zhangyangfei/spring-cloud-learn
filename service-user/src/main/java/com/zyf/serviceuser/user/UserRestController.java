@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zyf.serviceuser.exception.NotFoundException;
 
-
 /**
  * rest风格站点
  */
@@ -39,7 +38,7 @@ public class UserRestController {
 	@GetMapping(value = "/user/{id}", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<User> getUser2(@PathVariable int id) {
 		// 省略主键查询过程
-		System.out.println("用户id="+id);
+		System.out.println("用户id=" + id);
 		User user = new User(1, "李四", 1, "rest风格获取用户");
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("issuccess", "true");// 设置响应头
@@ -50,7 +49,7 @@ public class UserRestController {
 	@GetMapping("/user/{id}/{name}")
 	public List<User> getUsers(@PathVariable int id, @PathVariable String name) {
 		// 省略条件查询过程
-		User[] users = {new User(1, "吉姆格林", 1, "rest风格，更新部分属性")};
+		User[] users = { new User(1, "吉姆格林", 1, "rest风格，更新部分属性") };
 //		User[] users = {};
 		if (users.length < 1) {
 			throw new NotFoundException("001", "没有相关用户");

@@ -21,7 +21,7 @@ import com.zyf.appserver.exception.NotFoundException;
 @ResponseBody // 请求结果默认转换为json
 public class UserController {
 	
-	private static final String SERVICE_USER="serviceuser";// 微服务配置:微服务名称spring.application.name
+	private static final String SERVICE_USER="service-user";// 微服务配置:微服务名称spring.application.name
 
 	// rest请求模板-非负载均衡调用，只能使用IP地址
 	RestTemplate restTemplate = new RestTemplate();
