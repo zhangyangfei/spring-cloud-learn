@@ -1,0 +1,26 @@
+server:
+  port: 80 # 服务器端口
+
+spring:
+  application:
+    name: spring-zuul # 微服务名称
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+      
+#zuul网关
+zuul:
+  routes:
+    serviceproduct: # 产品微服务
+      path: /product/** # 指定请求匹配url
+      serviceId: service-product # 指定请求转发的微服务id
+    serviceuser: # 用户微服务
+      path: /user/**
+      serviceId: service-user
+      
+#zuul网关超时设置     
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 2000
