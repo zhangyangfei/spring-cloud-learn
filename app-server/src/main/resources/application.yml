@@ -1,0 +1,13 @@
+server:
+  port: 8001 # 服务器端口
+spring:
+  application:
+    name: app-server # 微服务名称
+  mvc: #定义视图解析器的规则
+    view:
+      prefix: classpath:/templates/ #文件前缀，templates是thymeleafd的默认路径
+      suffix: .html #文件后缀
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域

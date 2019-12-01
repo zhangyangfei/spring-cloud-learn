@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+//@EnableDiscoveryClient // 该注解可以省略
 public class ServiceUserApplication {
 
 	public static void main(String[] args) {
