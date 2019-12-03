@@ -1,0 +1,33 @@
+server:
+  port: 8001 # 服务器端口
+
+spring:
+  application:
+    name: app-server # 微服务名称
+  mvc: #定义视图解析器的规则
+    view:
+      prefix: classpath:/templates/ #文件前缀，templates是thymeleafd的默认路径
+      suffix: .html #文件后缀
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+      
+ribbon:
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 2000   #负载均衡超时时间，默认值5000  # 超过则会断路
+  ConnectTimeout: 1000 #ribbon请求连接的超时时间，默认值2000
+  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+    
+# 断路器
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: true #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000 #断路器超时时间，默认1000ms # 注意：与ribbon.ReadTimeout谁小谁生效            
