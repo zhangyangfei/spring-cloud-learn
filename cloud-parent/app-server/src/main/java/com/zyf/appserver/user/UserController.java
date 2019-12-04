@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.zyf.appserver.exception.NotFoundException;
+import com.zyf.systembase.constant.ServiceConstants;
 
 
 @Controller
@@ -46,7 +47,8 @@ public class UserController {
 //		User user2 = servcieRestTemplate.getForObject("http://"+SERVICE_USER+"/userRestController" + "/user/{id}", User.class, id);
 		User user2 = null;
 		for(int i =1;i<=10;i++){
-			user2 = servcieRestTemplate.getForObject("http://"+SERVICE_USER+"/userRestController" + "/user/{id}", User.class, i);
+			user2 = 
+			servcieRestTemplate.getForObject("http://"+ServiceConstants.用户微服务.getId()+"/userRestController" + "/user/{id}", User.class, i);
 		}
 		return user2;
 	}

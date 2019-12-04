@@ -18,4 +18,13 @@
 		</dependency>
 	</dependencies>
 
+	<!-- maven install生成可运行的jar（工程内要有main方法），否则是一个普通jar -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
