@@ -13,6 +13,14 @@
 	<name>eureka-server</name>
 	<description>eureka服务端</description>
 
+	<!-- eureka服务端 -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+	</dependencies>
+	
 	<!-- maven install生成可运行的jar（工程内要有main方法），否则是一个普通jar -->
 	<build>
 		<plugins>

@@ -7,7 +7,7 @@ $(function() {
 	};
 	$("#insert").click(function() {
 		$.post({
-			url : "/user",
+			url : "/insert",
 			// 此处需要告知传递参数类型为JSON，不能缺少
 			contentType : "application/json",
 			// 将JSON转化为字符串传递
@@ -24,7 +24,7 @@ $(function() {
 
 	$("#getUser").click(function() {
 		$.post({
-			url : "/user/1",
+			url : "/getUser/1",
 			success : function(result,status,jqXHR) {
 				var issuccess = jqXHR.getResponseHeader("issuccess"); //获取响应头数据
 				var sta = jqXHR.status;// 获取HttpStatus
@@ -37,7 +37,7 @@ $(function() {
 
 	$("#getUsers").click(function() {
 		$.get({
-			url : "/user/1/zhang",
+			url : "/getUsers/1/zhang",
 			success : function(result) {
 				if (result != null) {
 					alert(JSON.stringify(result));
@@ -54,7 +54,7 @@ $(function() {
 	};
 	$("#update").click(function() {
 		$.ajax({
-			url : "/user/1",
+			url : "/update/1",
 			type : 'PUT',
 			// 此处需要告知传递参数类型为JSON，不能缺少
 			contentType : "application/json",
@@ -71,7 +71,7 @@ $(function() {
 
 	$("#updatepatch").click(function() {
 		$.ajax({
-			url : "/user/1/zhang/部分更新",
+			url : "/updatepatch/1/zhang/部分更新",
 			type : "PATCH",
 			success : function(result) {
 				if (result != null) {
@@ -82,8 +82,7 @@ $(function() {
 	});
 	$("#delete").click(function() {
 		$.ajax({
-			url : "/user/1",
-			type : "DELETE",
+			url : "/delete?id="+1,
 			success : function(result) {
 				if (result != null) {
 					alert(JSON.stringify(result));

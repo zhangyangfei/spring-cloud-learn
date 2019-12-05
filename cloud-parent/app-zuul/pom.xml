@@ -13,6 +13,19 @@
 	<name>app-zuul</name>
 	<description>zuul网关</description>
 	
+	<dependencies>
+		<!-- eureka客户端 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<!-- zuul网关 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+		</dependency>
+	</dependencies>
+	
 	<!-- maven install生成可运行的jar（工程内要有main方法），否则是一个普通jar -->
 	<build>
 		<plugins>
