@@ -7,3 +7,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+  instance:
+    lease-renewal-interval-in-seconds: 1 # 客户端发送【心跳】给服务器的时间间隔，表明前者仍然活跃，默认30秒
+    lease-expiration-duration-in-seconds: 2 # 客户端未发送心跳，服务器在该时长后可以将客户端实例删除

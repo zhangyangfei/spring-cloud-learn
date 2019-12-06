@@ -8,3 +8,8 @@ eureka:
     register-with-eureka: false # 是否注册给服务中心
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 治理客户端服务域
+  server:
+    # 自我保护模式开关:false表示关闭。默认为true。测试时关闭自我保护机制，保证不可用服务及时踢出。建议生产环境打开此配置。
+    # 自我保护模式：打开时，出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除。
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 1000 # 每隔1s扫描客户端列表，移除失效客户端（或未发送心跳的客户端）

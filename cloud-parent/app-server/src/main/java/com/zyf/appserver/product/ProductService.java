@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient("service-product") // 指定微服务id
 public interface ProductService {
 
-	// 指定微服务的请求方法
+	// 指定微服务的请求方法。使用feign时，参数名要在@PathVariable中用value指明。
 	@GetMapping("/productRestController/product/{id}")
-	public Product getById(@PathVariable String id);
+	public Product getById(@PathVariable(value="id") String id);
 
 	@PostMapping("/productRestController/product")
 	public Product insert(@RequestBody Product product);
