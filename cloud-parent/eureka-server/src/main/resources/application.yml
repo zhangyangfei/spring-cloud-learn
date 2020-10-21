@@ -1,15 +1,76 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: eureka-server-7000
+
+###########    eureka单机 开始     ###########
+---
+spring:
+  profiles: eureka-server-7000
 server:
-  port: 7001 # 服务器端口
+  port: 7000 # 服务器端口
 eureka:
-  instance:
-    hostname: localhost # Eureka注册服务器名称
-  client:
-    fetch-registry: false # 是否检索服务
-    register-with-eureka: false # 是否注册给服务中心
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 治理客户端服务域
   server:
     # 自我保护模式开关:false表示关闭。默认为true。测试时关闭自我保护机制，保证不可用服务及时踢出。建议生产环境打开此配置。
     # 自我保护模式：打开时，出现网络分区、eureka在短时间内丢失过多客户端时，会进入自我保护模式，即一个服务长时间没有发送心跳，eureka也不会将其删除。
     enable-self-preservation: false
-    eviction-interval-timer-in-ms: 1000 # 每隔1s扫描客户端列表，移除失效客户端（或未发送心跳的客户端）
+    eviction-interval-timer-in-ms: 5000 # 每隔5s扫描客户端列表，移除失效客户端（或未发送心跳的客户端）
+  instance:
+    hostname: localhost # Eureka注册服务器名称
+  client:
+    fetch-registry: false # 是否客户端从eureka服务端检索服务列表，默认true
+    register-with-eureka: false # 是否将自己注册给服务中心，默认true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 治理客户端服务域
+###########    eureka单机 结束     ###########
+
+###########  模拟eureka集群  开始  ###########
+---
+spring:
+  profiles: eureka-server-7001
+server:
+  port: 7001 # 服务器端口
+eureka:
+  server:
+    enable-self-preservation: false # 自我保护模式开关
+    eviction-interval-timer-in-ms: 10000 # 每隔多少毫秒扫描客户端列表，移除失效客户端
+  client:
+    fetch-registry: true # 是否客户端从服务治理中心检索服务列表，默认true
+    register-with-eureka: true # 是否将自己注册给服务治理中心，默认true
+    serviceUrl:
+      defaultZone: http://localhost:7002/eureka/,http://localhost:7003/eureka/ # 治理客户端服务域
+  instance:
+    lease-renewal-interval-in-seconds: 3 # 客户端发送【心跳】给服务端的时间间隔，表明前者仍然活跃，默认30秒
+    lease-expiration-duration-in-seconds: 1 # 客户端未发送心跳，服务端在多少秒后将客户端实例删除
+---
+spring:
+  profiles: eureka-server-7002
+server:
+  port: 7002
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7003/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 1
+---
+spring:
+  profiles: eureka-server-7003
+server:
+  port: 7003
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 1
+###########  模拟eureka集群  结束  ###########
