@@ -1,13 +1,31 @@
-server:
-  port: 10001 # 服务器端口
 spring:
   application:
     name: service-product #微服务名称
+  profiles:
+    active: 10001
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+      defaultZone: http://localhost:7000/eureka/ # 治理客户端服务域
   instance:
-    lease-renewal-interval-in-seconds: 5 # 客户端发送【心跳】给服务器的时间间隔，表明前者仍然活跃，默认30秒
-    lease-expiration-duration-in-seconds: 1 # 客户端未发送心跳，服务器在该时长后可以将客户端实例删除
+    lease-renewal-interval-in-seconds: 5 # 发送心跳时间间隔，默认30秒
+    lease-expiration-duration-in-seconds: 10 # 续约到期时间（即该时间内server未收到心跳即可被剔除，应大于心跳间隔）
     instance-id: ${spring.cloud.client.ip-address}:${server.port} #将微服务的ip和端口展示到控制台页面
+---
+spring:
+  profiles: 10001
+server:
+  port: 10001 # 服务器端口
+  tomcat:
+    max-threads: 5 # 配置tomcat容器支持最大线程数
+
+---
+spring:
+  profiles: 10002
+server:
+  port: 10002
+---
+spring:
+  profiles: 10003
+server:
+  port: 10003

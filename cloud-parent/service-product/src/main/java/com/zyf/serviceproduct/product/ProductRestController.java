@@ -1,5 +1,7 @@
 package com.zyf.serviceproduct.product;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,19 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/productRestController")
 public class ProductRestController {
 
+	Logger logger = LoggerFactory.getLogger(getClass());
+
 	@GetMapping("/product/{id}")
 	public Product getProduct(@PathVariable String id) throws InterruptedException {
 		Long ms = (long) (2000L*Math.random());// 随机数，2000之内
-		System.out.println(ms);
-		Thread.sleep(ms);
+//		System.out.println(ms);
+//		Thread.sleep(1000L);
+		logger.info("产品" + id);
 		return new Product(id, "产品" + id);
 	}
 
 	@PostMapping("/product")
 	public Product insert(@RequestBody Product product) throws InterruptedException {
 		Long ms = (long) (2000L*Math.random());
-		System.out.println(ms);
-		Thread.sleep(ms);
+//		System.out.println(ms);
+//		Thread.sleep(ms);
 		System.out.println("产品id=" + product.getId());
 		return product;
 	}

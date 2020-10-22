@@ -20,7 +20,6 @@ ribbon:
   ConnectTimeout: 1000 #ribbon请求连接的超时时间，默认值2000
   MaxAutoRetries: 0     #对当前实例的重试次数，默认0
   MaxAutoRetriesNextServer: 0 #对切换实例的重试次数，默认1
-
 service-user: #微服务名称
   ribbon:
     #负载均衡策略
@@ -30,6 +29,29 @@ service-user: #微服务名称
     #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule #权重策略
     #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule #最佳策略
     #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule #可用过滤策略
+service-product:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+feign:
+  compression:
+    response:
+      enabled: true # 开启响应压缩
+    request:
+      enabled: true # 开启请求压缩
+      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型
+      min-request-size: 2048 # 设置触发压缩的大小下限
+  client:
+    config:
+      service-product:
+        loggerLevel: FULL # 配置Feign的日志级别，相当于代码配置方式中的Logger
+        #loggerLevel: NONE # 不记录任何日志，适用于生成
+logging:
+  level:
+    com.zyf.appserver.product.ProductService: debug #Feign的日志
+feign:
+
+
 
 # 断路器
 hystrix:
@@ -40,4 +62,4 @@ hystrix:
           enabled: true #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
         isolation:
           thread:
-            timeoutInMilliseconds: 1000 #断路器超时时间，默认1000ms # 注意：与ribbon.ReadTimeout谁小谁生效            
+            timeoutInMilliseconds: 1000 #断路器超时时间，默认1000ms # 注意：与ribbon.ReadTimeout谁小谁生效

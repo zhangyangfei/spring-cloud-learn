@@ -23,7 +23,7 @@ public class ProductController {
 	@RequestMapping("/getById/{id}")
 	@HystrixCommand(fallbackMethod = "errorGetById", // 断路器-降级处理(默认超时时间1000ms，超时则调用fallbackMethod方法)
 			commandProperties = {
-					@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000") }) // 设置超时时间
+					@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000") }) // 设置超时时间
 	public Product getById(@PathVariable String id) {
 		// 调用微服务
 		Product product = productService.getById(id);

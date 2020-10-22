@@ -34,7 +34,7 @@ server:
 eureka:
   server:
     enable-self-preservation: false # 自我保护模式开关
-    eviction-interval-timer-in-ms: 10000 # 每隔多少毫秒扫描客户端列表，移除失效客户端
+    eviction-interval-timer-in-ms: 5000 # 每隔多少毫秒扫描客户端列表，移除失效客户端
   client:
     fetch-registry: true # 是否客户端从服务治理中心检索服务列表，默认true
     register-with-eureka: true # 是否将自己注册给服务治理中心，默认true
