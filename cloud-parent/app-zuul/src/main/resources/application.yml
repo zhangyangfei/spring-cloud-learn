@@ -8,7 +8,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/ # 治理客户端服务域
+      defaultZone: http://localhost:7000/eureka/ # 治理客户端服务域
       
 #zuul网关
 zuul:
