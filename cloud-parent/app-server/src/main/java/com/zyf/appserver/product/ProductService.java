@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * feign声明式调用微服务（实现了负载均衡）
  */
-@FeignClient("service-product") // 指定微服务id
+@FeignClient(value = "service-product", // 指定微服务id
+		fallback = ProductServiceFallback.class) // 指定降级方法的实现类
 public interface ProductService {
 
 	// 指定微服务的请求方法。使用feign时，参数名要在@PathVariable中用value指明。

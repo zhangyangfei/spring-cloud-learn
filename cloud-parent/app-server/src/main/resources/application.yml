@@ -34,6 +34,8 @@ service-product:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
 feign:
+  hystrix:
+    enabled: true #在feign中开启hystrix熔断
   compression:
     response:
       enabled: true # 开启响应压缩
@@ -49,7 +51,7 @@ feign:
 logging:
   level:
     com.zyf.appserver.product.ProductService: debug #Feign的日志
-feign:
+
 
 
 
