@@ -63,8 +63,15 @@ hystrix:
         timeout:
           enabled: true #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
         isolation:
+          strategy: ExecutionIsolationStrategy.THREAD #隔离策略：线程池隔离，默认
+          #strategy: ExecutionIsolationStrategy.SEMAPHORE #隔离策略：信号量隔离
+          #maxConcurrentRequests: 20 #最大信号量上限
           thread:
             timeoutInMilliseconds: 1000 #断路器超时时间，默认1000ms # 注意：与ribbon.ReadTimeout谁小谁生效
+      circuitBreaker:
+        requestVolumeThreshold: 20 #触发熔断的最小请求次数，默认20
+        sleepWindowInMilliseconds: 5000 #熔断多少秒后去尝试请求，默认5000毫秒
+        errorThresholdPercentage: 50 #触发熔断的失败请求最小占比，默认50%
 
 #dashboard暴露所有断点
 management:
