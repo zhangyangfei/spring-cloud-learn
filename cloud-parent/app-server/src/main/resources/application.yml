@@ -65,3 +65,10 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 1000 #断路器超时时间，默认1000ms # 注意：与ribbon.ReadTimeout谁小谁生效
+
+#dashboard暴露所有断点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

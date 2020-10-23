@@ -23,8 +23,8 @@ $(function() {
 	});
 
 	$("#getUser").click(function() {
-		$.post({
-			url : "/getUser/1",
+		$.get({
+			url : "/user/getUser/1",
 			success : function(result,status,jqXHR) {
 				var issuccess = jqXHR.getResponseHeader("issuccess"); //获取响应头数据
 				var sta = jqXHR.status;// 获取HttpStatus

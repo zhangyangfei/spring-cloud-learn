@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -46,9 +48,10 @@ public class UserController {
 	 * 负载均衡调用：调用双方都必须注册到服务治理中心（如果调用方未注册，报错：IllegalStateException No instances available for 被调用的serviceId）
 	 */
 	@RequestMapping(value = "/getUser/{id}")
+	@HystrixCommand(fallbackMethod = "getUserFallback")
 	public User getUser(@PathVariable int id) {
 		// get请求
-		 User user = restTemplate.getForObject("http://localhost:9001/userRestController/user/{id}", User.class, id);
+		// User user = restTemplate.getForObject("http://localhost:9001/userRestController/user/{id}", User.class, id);
 		// User user2 = servcieRestTemplate.getForObject("http://"+SERVICE_USER+"/userRestController" + "/user/{id}", User.class, id);
 		User user2 = null;
 		for(int i =1;i<=10;i++){
@@ -101,6 +104,10 @@ public class UserController {
 		 // delete请求
 		 restTemplate.delete("http://localhost:9001/userRestController/user/{id}", id);
 		 return new User(1, "吉姆格林", 1, "rest风格，删除");
+	 }
+
+	 public User getUserFallback(int id){
+		return new User(0, "降级处理", 1, "降级处理");
 	 }
 
 }

@@ -14,7 +14,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 @Controller
 @RequestMapping("/product")
 @ResponseBody
-//@DefaultProperties(defaultFallback = "productFallBack") // 默认降级方法
 public class ProductController {
 
 	@Autowired
@@ -54,7 +53,4 @@ public class ProductController {
 		return new Product("", "存入产品连接超时！");
 	}
 
-	public Product productFallBack(){
-		return new Product("", "请求超时！");
-	}
 }

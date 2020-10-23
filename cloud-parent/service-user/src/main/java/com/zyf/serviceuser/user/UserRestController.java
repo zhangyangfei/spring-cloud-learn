@@ -2,6 +2,7 @@ package com.zyf.serviceuser.user;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,10 @@ public class UserRestController {
 
 	// consumes限定请求类型。produces限定返回类型。
 	@GetMapping(value = "/user/{id}", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<User> getUser2(@PathVariable int id) {
+	public ResponseEntity<User> getUser2(@PathVariable int id) throws InterruptedException {
+		long mr = (long) (Math.random()*2000);
+		System.out.println(mr);
+//		Thread.sleep(mr);
 		// 省略主键查询过程
 		System.out.println("用户id=" + id);
 		User user = new User(1, "李四", 1, "rest风格获取用户");
