@@ -1,5 +1,5 @@
 server:
-  port: 80 # 服务器端口
+  port: 8100 # 服务器端口
 
 spring:
   application:
@@ -19,8 +19,8 @@ zuul:
     serviceuser: # 用户微服务
       path: /user/**
       serviceId: service-user
-      
-#zuul网关超时设置     
+
+#zuul网关超时设置
 ribbon:
   ConnectTimeout: 1000
   ReadTimeout: 2000

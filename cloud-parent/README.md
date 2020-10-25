@@ -1,14 +1,16 @@
-eureka-server：服务治理中心，端口7000
+# 服务治理中心
 
-app-server：app服务端，端口8001，调用微服务
+eureka-server：端口700X
 
-微服务：
+# 网关
 
-service-user：用户，端口9001
+app-zuul：app网关，端口80，调用微服务
 
-service-product：产品，端口10001
+app-server：app服务端，端口800X，调用微服务，测试调用微服务的工程	
 
-流程图：
+# 微服务
 
-<img src="C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20201022143411442.png" alt="image-20201022143411442" style="zoom:80%;" />
+service-user：用户，端口900X
+
+service-product：产品，端口1000X
 

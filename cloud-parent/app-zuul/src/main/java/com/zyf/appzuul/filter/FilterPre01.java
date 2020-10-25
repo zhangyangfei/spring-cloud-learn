@@ -14,7 +14,7 @@ import com.netflix.zuul.exception.ZuulException;
  * zuul过滤器pre01
  */
 @Component
-public class ZuulFilterPre01 extends ZuulFilter {
+public class FilterPre01 extends ZuulFilter {
 
 	// 是否应该执行该过滤器，如果是false，则不执行该filter
 	@Override
