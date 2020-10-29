@@ -19,7 +19,7 @@ public class ProductRestController {
 	public Product getProduct(@PathVariable String id) throws InterruptedException {
 		Long ms = (long) (2000L*Math.random());// 随机数，2000之内
 		System.out.println(ms);
-		Thread.sleep(ms);
+//		Thread.sleep(ms);
 		logger.info("产品" + id);
 		return new Product(id, "产品" + id);
 	}
