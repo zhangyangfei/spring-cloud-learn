@@ -25,6 +25,7 @@
 		<module>service-product</module>
 		<module>system-base</module>
         <module>app-gateway3</module>
+        <module>app-gateway-sentinel</module>
     </modules>
 
 	<!-- 子工程享有以下属性和依赖 -->

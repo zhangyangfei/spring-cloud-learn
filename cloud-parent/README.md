@@ -10,6 +10,8 @@ app-zuul：app网关，端口810X，调用微服务
 
 app-gateway：app网关，端口820X
 
+app-gateway-sentinel：sentinel限流的网关，端口830X
+
 # 微服务
 
 service-user：用户，端口900X
