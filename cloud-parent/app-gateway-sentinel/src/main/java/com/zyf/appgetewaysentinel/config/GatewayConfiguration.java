@@ -35,6 +35,16 @@ import java.util.Set;
 
 /**
  * sentinel限流配置
+ * <p>
+ * sentinel控制台配置限流规则：
+ * 0.注释掉本java文件的限流配置代码
+ * 1.引入依赖 spring-cloud-starter-alibaba-sentinel
+ * 2.配置控制台连接
+ * spring.cloud.sentinel.transport.dashboard=localhost:8080
+ * spring.cloud.sentinel.transport.port=8719
+ * 3.下载控制台jar并且启动
+ * 4.访问资源，在控制台能看到服务节点（默认懒加载节点）
+ * 5.在簇点链路可以配置限流
  */
 @Configuration
 public class GatewayConfiguration {

@@ -10,6 +10,10 @@ spring:
   application:
     name: app-gateway-sentinel
   cloud:
+    sentinel: # sentinel控制台连接配置
+      transport:
+        dashboard: localhost:8080 # sentinel控制台IP和端口
+        port: 8719
     gateway: #springcloudgateway配置
       routes: #路由（数组）
         # 路由1，产品微服务id

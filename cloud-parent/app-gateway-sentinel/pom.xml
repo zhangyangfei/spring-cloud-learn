@@ -25,7 +25,20 @@
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
-            <version>1.6.3</version>
         </dependency>
+
+
+        <!--阿里巴巴sentinel-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <!--sentinel控制台连接，spring-cloud-starter-alibaba-sentinel已经集成了改依赖-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.csp</groupId>-->
+            <!--<artifactId>sentinel-transport-simple-http</artifactId>-->
+        <!--</dependency>-->
+
     </dependencies>
 </project>
