@@ -21,3 +21,6 @@ service-product：产品，端口1000X
 # 熔断监控
 
 turbine-server：熔断监控聚合，端口1100X
+
+# 幕布地址
+https://share.mubu.com/doc/1eGgUggYmN_
