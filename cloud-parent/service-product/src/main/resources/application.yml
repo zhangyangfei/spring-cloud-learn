@@ -3,6 +3,45 @@ spring:
     name: service-product #微服务名称
   profiles:
     active: 10001
+
+  # 链路追踪zipkin配置
+  zipkin: #链路追踪zipkin配置
+    #base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      #type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+      type: rabbit #以rabbit的方式向发送追踪数据
+  sleuth: #链路追踪sleuth配置
+    sampler:
+      probability: 1.0 #采样的百分比，默认1全部采用
+  cloud:
+    stream:
+      instanceCount: 2  #消息分区：当前为消费者，消费者总数
+      instanceIndex: 0  #消息分区：当前消费者的索引
+      bindings:
+        myinput: #自定义的消息输入渠道ID=myinput，可定义多个
+          destination: myoutput-stream-default
+          group: group-myinput #消息分组，同渠道同组的消费者只有一个获取到消息
+          consumer:
+            partitioned: true  #消息分区：true开启支持
+      binders:
+        defaultRabbit:
+          type: rabbit
+
+
+  # RabbitMQ连接配置，日志追踪
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener: # 这里配置了重试策略
+      direct:
+        retry:
+          enabled: true
+      simple:
+        retry:
+          enabled: true
+
 eureka:
   client:
     serviceUrl:
@@ -11,6 +50,7 @@ eureka:
     lease-renewal-interval-in-seconds: 5 # 发送心跳时间间隔，默认30秒
     lease-expiration-duration-in-seconds: 10 # 续约到期时间（即该时间内server未收到心跳即可被剔除，应大于心跳间隔）
     instance-id: ${spring.cloud.client.ip-address}:${server.port} #将微服务的ip和端口展示到控制台页面
+
 ---
 spring:
   profiles: 10001
@@ -18,7 +58,6 @@ server:
   port: 10001 # 服务器端口
   tomcat:
     max-threads: 5 # 配置tomcat容器支持最大线程数
-
 ---
 spring:
   profiles: 10002

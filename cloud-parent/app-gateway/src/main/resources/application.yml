@@ -39,6 +39,50 @@ spring:
           uri: lb://service-user
           predicates:
           - Path=/userRestController/**
+    #springcloud stream 配置
+    stream:
+      bindings:
+        myoutput: #消息输出渠道ID=myoutput
+          destination: myoutput-stream-default #发送到此exchange(交换机)
+          producer: #消息分区：消息生产者
+            partition-key-expression: payload  #消息分区：分区关键字，可以根据实际的输出消息规则来配置SpEL来生成合适的分区键
+            partition-count: 2  #消息分区：分区大小
+      binders:
+        defaultRabbit:
+          type: rabbit
+
+  # 链路追踪zipkin配置
+  zipkin:
+    #base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      #type: web #请求方式,默认以http的方式向zipkin server发送追踪数据，发送到base-url
+      type: rabbit #以rabbit的方式向发送追踪数据
+  sleuth: #链路追踪sleuth配置
+    sampler:
+      probability: 1.0 #采样的百分比，默认1全部采用
+
+  # RabbitMQ连接配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener: # 这里配置了重试策略
+      direct:
+        retry:
+          enabled: true
+      simple:
+        retry:
+          enabled: true
+
+# 日志级别
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+
+
 ---
 spring:
   profiles: 8200
